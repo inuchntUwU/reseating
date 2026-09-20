@@ -1,32 +1,48 @@
-# React + TypeScript + Vite
+# 席替え用ランダムツール
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+学校の席替えで喧嘩しないためのツールです。名簿（出席番号など）から自動で席をランダムに割り振ります。
 
-Currently, two official plugins are available:
+**公開先: https://inuchntUwU.github.io/reseating/**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 機能
 
-## React Compiler
+### 自由なレイアウト
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+行数と列数を決めたあと、任意の席をクリックで無効化できます。列ごとに席数が違う、通路がある、欠席者がいるといったケースに対応します。
 
-## Expanding the Oxlint configuration
+### 生徒一人一人のルール
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- **前から N 行目まで** — 視力や聴力に配慮して前方に座らせたい場合
+- **席を固定** — 車椅子や機材の都合でこの席と決まっている場合
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### この人とこの人を隣にしない
+
+隣り合わせにしたくない組み合わせを登録できます。隣の判定は上下左右のみで、斜めは隣とみなしません。通路を無効席にしておけば、その左右も隣になりません。
+
+### そのほか
+
+- 出席番号の一括入力（開始〜終了を指定して名簿に流し込む）
+- 名簿・条件・直近の結果はブラウザに保存（localStorage）。サーバーには何も送りません
+- 座席表の印刷
+
+## 利用方法
+
+GitHub Pages で公開しているため、以下のリンクからそのまま使えます。
+
+https://inuchntUwU.github.io/reseating/
+
+## 開発
+
+```bash
+npm install
+npm run dev      # 開発サーバー
+npm run build    # 本番ビルド（dist/ に出力）
+npm test         # ソルバーのテスト
+npm run lint     # oxlint
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+React 19 + TypeScript + Vite。`master` への push で GitHub Actions がビルドして Pages に公開します。
+
+### 仕組み
+
+席の割り当ては `src/lib/solver.ts` のバックトラッキング探索で行います。毎回、候補の席が最も少ない人から順に決め（MRV）、候補をシャッフルして試すため、制約を守りつつ結果は毎回変わります。すべての条件を同時に満たす配置が無い場合は、理由つきのメッセージを表示します。
