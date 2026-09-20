@@ -2,7 +2,7 @@
 
 学校の席替えで喧嘩しないためのツールです。名簿（出席番号など）から自動で席をランダムに割り振ります。
 
-**公開先: https://inuchntUwU.github.io/reseating/**
+**公開先: https://reseating.inuch.net/**
 
 ## 機能
 
@@ -29,7 +29,7 @@
 
 GitHub Pages で公開しているため、以下のリンクからそのまま使えます。
 
-https://inuchntUwU.github.io/reseating/
+https://reseating.inuch.net/
 
 ## 開発
 
