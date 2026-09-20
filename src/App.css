@@ -1,0 +1,274 @@
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+}
+
+.header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+button {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: inherit;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: inherit;
+}
+
+input[type='number'] {
+  width: 6rem;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+.error {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--error);
+  border-radius: 6px;
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+.panel {
+  margin: 0.75rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+details.panel {
+  padding: 0;
+}
+
+.panel-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.panel-summary::-webkit-details-marker {
+  display: none;
+}
+
+.panel-summary::before {
+  content: '\25B8';
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+details[open] > .panel-summary::before {
+  content: '\25BE';
+}
+
+.panel-summary:hover {
+  background: var(--seat);
+}
+
+.panel-meta {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.8125rem;
+}
+
+.panel-body {
+  padding: 0 1rem 1rem;
+}
+
+.panel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.hint,
+.count {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.count--error {
+  color: var(--error);
+  font-weight: 600;
+}
+
+.field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.field-row label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.blackboard {
+  padding: 0.35rem;
+  border-radius: 6px 6px 0 0;
+  background: var(--board);
+  color: #fff;
+  text-align: center;
+  font-size: 0.8125rem;
+  letter-spacing: 0.2em;
+}
+
+.grid {
+  display: grid;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+}
+
+.seat,
+.layout-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.125rem;
+  min-height: 3.5rem;
+  padding: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--seat);
+  text-align: center;
+  font-size: 0.8125rem;
+  word-break: break-word;
+}
+
+.seat--empty {
+  border-style: dashed;
+  background: transparent;
+}
+
+.seat--off,
+.layout-cell--off {
+  border-style: dashed;
+  background: transparent;
+  color: var(--muted);
+}
+
+.layout-cell {
+  min-height: 2.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.seat-name {
+  font-weight: 600;
+}
+
+.badge {
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.625rem;
+}
+
+.constraints {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.constraints th,
+.constraints td {
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.pair-list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pair-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+
+.footer {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+@media print {
+  .actions,
+  .editors,
+  .footer,
+  .header p,
+  .error {
+    display: none;
+  }
+
+  .panel {
+    border: none;
+    padding: 0;
+  }
+}
